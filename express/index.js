@@ -5,7 +5,10 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json()); 
 const projectRoutes = require('./routes/projectRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 app.use('/api/projects', projectRoutes); 
+app.use('/api/users', userRoutes);
 
 
 const MONGO_URI = 'mongodb+srv://<admin>:<admin>@cluster0.cp0grre.mongodb.net/?appName=Cluster0';
