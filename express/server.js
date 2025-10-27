@@ -4,10 +4,8 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//const DB_URI = 'mongodb+srv://<usuario>:<contraseña>@<tu_cluster>.mongodb.net/<nombre_de_tu_base_de_datos>?retryWrites=true&w=majority';
+const DB_URI = 'mongodb+srv://general:General123@cluster0.cp0grre.mongodb.net/Moongose_ITBA?retryWrites=true&w=majority';
 
-//temporal
-const DB_URI = 'mongodb://localhost:27017/local';
 
 mongoose.connect(DB_URI)
   .then(() => console.log('¡Conexión exitosa a MongoDB!'))
