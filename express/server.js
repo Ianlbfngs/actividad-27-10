@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { projectsRouter } = require("./routes/projectsRouter");
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 const DB_URI = 'mongodb+srv://general:General123@cluster0.cp0grre.mongodb.net/Moongose_ITBA?retryWrites=true&w=majority';
@@ -17,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 
+app.use("/api/proyectos", projectsRouter);
 
 
 app.use((req, res, next) => {

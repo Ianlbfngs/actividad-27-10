@@ -1,5 +1,5 @@
+const mongoose = require('mongoose');
 
-// Task Schema 
 const taskSchema = new mongoose.Schema({
     title: {
         type: String,
