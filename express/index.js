@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 
 const app = express();
 app.use(express.json()); 
+const projectRoutes = require('./routes/projectRoutes');
+app.use('/api/projects', projectRoutes); 
 
-// URL de conexión (cambia 'tu-base-de-datos' por el nombre que quieras)
+
 const MONGO_URI = 'mongodb+srv://<admin>:<admin>@cluster0.cp0grre.mongodb.net/?appName=Cluster0';
 
 mongoose.connect(MONGO_URI)
