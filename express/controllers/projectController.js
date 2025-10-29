@@ -31,7 +31,7 @@ exports.getProjectById = async (req, res) => {
       .populate('teamMembers.user', 'name email');
 
     if (!project) {
-      return res.status(404).json({ message: 'Proyecto no encontrado' });
+      return res.status(404).json({ message: `Proyecto con id \"${req.params.id}\" no encontrado` });
     }
 
     res.status(200).json(project);
@@ -49,7 +49,7 @@ exports.updateProject = async (req, res) => {
     );
 
     if (!updatedProject) {
-      return res.status(404).json({ message: 'Proyecto no encontrado' });
+      return res.status(404).json({ message: `Proyecto con id \"${req.params.id}\" no encontrado` });
     }
 
     res.status(200).json(updatedProject);
@@ -63,7 +63,7 @@ exports.deleteProject = async (req, res) => {
     const deletedProject = await Project.findByIdAndDelete(req.params.id);
 
     if (!deletedProject) {
-      return res.status(404).json({ message: 'Proyecto no encontrado' });
+      return res.status(404).json({ message: `Proyecto con id \"${req.params.id}\" no encontrado` });
     }
 
 

@@ -2,10 +2,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const logger = require('./middleware/logger')
-const { errorHandler, notFoundRoute } = require('./middleware/errorHandler')
-const projectRoutes = require('./routes/projectRoutes')
-const userRoutes = require('./routes/userRoutes')
+const logger = require('./middleware/logger');
+const { errorHandler, notFoundRoute } = require('./middleware/errorHandler');
+const projectRoutes = require('./routes/projectRoutes');
+const userRoutes = require('./routes/userRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 const PORT = process.env.PORT || 3000;
 
 
@@ -24,8 +25,10 @@ app.get('/', (req, res) => {
   res.send('Servidor funcionando');
 });
 
-app.use('/api/projects', projectRoutes);
 app.use('/api/users',userRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/tasks',taskRoutes);
+
 
 
 
