@@ -3,8 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('./middleware/logger')
-const {errorHandler,notFoundRoute} = require('./middleware/errorHandler')
-const projectRoutes = require('./routes/projectRoutes');
+const { errorHandler, notFoundRoute } = require('./middleware/errorHandler')
+const projectRoutes = require('./routes/projectRoutes')
+const userRoutes = require('./routes/userRoutes')
 const PORT = process.env.PORT || 3000;
 
 
@@ -19,7 +20,12 @@ mongoose.connect(DB_URI)
   .then(() => console.log('¡Conectado a MongoDB!'))
   .catch(err => console.error('Error al conectar a MongoDB:', err));
 
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando');
+});
+
 app.use('/api/projects', projectRoutes);
+app.use('/api/users',userRoutes);
 
 
 
