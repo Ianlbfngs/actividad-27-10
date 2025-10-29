@@ -1,8 +1,8 @@
 const express = require("express");
 const Project = require("../models/project"); 
-const projectsRouter = express.Router();
+const router = express.Router();
 
-projectsRouter.get("/", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const projects = await Project.find()
       .populate("owner", "name email") // opcional, si querés mostrar datos del dueño
@@ -14,7 +14,7 @@ projectsRouter.get("/", async (req, res, next) => {
   }
 });
 
-projectsRouter.get("/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const project = await Project.findById(req.params.id)
       .populate("owner", "name email")
@@ -30,7 +30,7 @@ projectsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-projectsRouter.post("/", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newProject = new Project(req.body);
     const savedProject = await newProject.save();
@@ -40,7 +40,7 @@ projectsRouter.post("/", async (req, res, next) => {
   }
 });
 
-projectsRouter.put("/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const updatedProject = await Project.findByIdAndUpdate(
       req.params.id,
@@ -59,7 +59,7 @@ projectsRouter.put("/:id", async (req, res, next) => {
 });
 
 
-projectsRouter.delete("/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const deleted = await Project.findByIdAndDelete(req.params.id);
 
@@ -73,4 +73,4 @@ projectsRouter.delete("/:id", async (req, res, next) => {
   }
 });
 
-module.exports = { projectsRouter };
+module.exports = router ;
