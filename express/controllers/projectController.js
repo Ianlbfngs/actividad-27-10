@@ -13,16 +13,42 @@ exports.createProject = async (req, res) => {
   }
 };
 
+//ejemplo de uso:GET /api/projects?page=1&limit=5&status=active&sort=-endDate
 exports.listProjects = async (req, res) => {
   try {
-    const projects = await Project.find()
+    const {
+      page = 1,
+      limit = 10,
+      status,
+      sort = 'createdAt'
+    } = req.query;
+
+    const filter = {};
+    if (status) filter.status = status;
+
+    const projects = await Project.find(filter)
       .populate('owner', 'name email')
-      .populate('teamMembers.user', 'name email');
-    res.status(200).json(projects);
+      .populate('teamMembers.user', 'name email')
+      .sort(sort)
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    const total = await Project.countDocuments(filter);
+
+    res.status(200).json({
+      total,
+      page: Number(page),
+      pages: Math.ceil(total / limit),
+      data: projects
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error al listar proyectos', error: error.message });
+    res.status(500).json({
+      message: 'Error al listar proyectos',
+      error: error.message
+    });
   }
 };
+
 
 exports.getProjectById = async (req, res) => {
   try {
