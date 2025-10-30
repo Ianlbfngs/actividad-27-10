@@ -48,7 +48,7 @@ exports.getTaskById = async (req, res) => {
       .populate('dependencies');
 
     if (!task) {
-      return res.status(404).json({ message: `Tarea con id \"${req.params.id}\" no encontrada` });
+      return res.status(404).json({ message: `Tarea con id '${req.params.id}' no encontrada` });
     }
     res.status(200).json(task);
   } catch (error) {
@@ -65,7 +65,7 @@ exports.updateTask = async (req, res) => {
       { new: true, runValidators: true }
     );
     if (!updatedTask) {
-      return res.status(404).json({ message: `Tarea con id \"${req.params.id}\" no encontrada` });
+      return res.status(404).json({ message: `Tarea con id '${req.params.id}' no encontrada` });
     }
     res.status(200).json(updatedTask);
   } catch (error) {
@@ -78,7 +78,7 @@ exports.deleteTask = async (req, res) => {
   try {
     const deletedTask = await Task.findByIdAndDelete(req.params.id);
     if (!deletedTask) {
-      return res.status(404).json({ message: `Tarea con id \"${req.params.id}\" no encontrada` });
+      return res.status(404).json({ message: `Tarea con id '${req.params.id}' no encontrada` });
     }
     res.status(200).json({ message: 'Tarea eliminada', tarea: deletedTask });
   } catch (error) {

@@ -30,7 +30,7 @@ exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
-      return res.status(404).json({ message: `Usuario con id \"${req.params.id}\" no encontrado` });
+      return res.status(404).json({ message: `Usuario con id '${req.params.id}' no encontrado` });
     }
     res.status(200).json(user);
   } catch (error) {
@@ -47,7 +47,7 @@ exports.updateUser = async (req, res) => {
       { new: true, runValidators: true }
     );
     if (!updatedUser) {
-      return res.status(404).json({ message: `Usuario con id \"${req.params.id}\" no encontrado` });
+      return res.status(404).json({ message: `Usuario con id '${req.params.id}' no encontrado` });
     }
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -60,7 +60,7 @@ exports.deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
-      return res.status(404).json({ message: `Usuario con id \"${req.params.id}\" no encontrado` });
+      return res.status(404).json({ message: `Usuario con id '${req.params.id}' no encontrado` });
     }
     res.status(200).json({ message: 'Usuario eliminado',usuario:deletedUser });
   } catch (error) {
